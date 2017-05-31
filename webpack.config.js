@@ -49,11 +49,24 @@ module.exports = {
             use: ['babel-loader', ],
             exclude: /node_modules/
         }, {
-            test: /\.css$/,
-            use: ExtractTextPlugin.extract({
-                use: 'css-loader'
-            }),
-        }, ],
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+
+                    // Could also be write as follow:
+                    // use: 'css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            query: {
+                                modules: true,
+                                localIdentName: '[name]__[local]___[hash:base64:5]'
+                            }
+                        },
+                    ]
+                }),
+            }, ],
     },
 
     plugins: [
@@ -63,5 +76,8 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         // prints more readable module names in the browser console on HMR updates
         new ExtractTextPlugin('bundle.css'),
+        new webpack.ProvidePlugin({
+            "React": "react",
+        }),
     ],
 };

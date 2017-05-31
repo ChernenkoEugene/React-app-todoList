@@ -1,22 +1,24 @@
 import React from 'react';
-import styles from './App.css';
+import CSSModules from 'react-css-modules'
+import Filters from './Filters';
+import AddTodo from '../containers/AddTodo';
+import VisibleTodoList from '../containers/VisibleTodoList';
+import UndoRedo from '../containers/UndoRedo';
+import styles from './app.css';
 
 
 const App = () => (
   <main className={styles.app}>
-<h1>
     <div className="container">
   	  <div className="jumbotron">
-        <button type="button" className="btn btn-lg btn-default">Default</button>
-        <button type="button" className="btn btn-lg btn-primary">Primary</button>
-        <button type="button" className="btn btn-lg btn-success">Success</button>
-        <button type="button" className="btn btn-lg btn-info">Info</button>
-        <button type="button" className="btn btn-lg btn-warning">Warning</button>
-        <button type="button" className="btn btn-lg btn-danger">Danger</button>
-        <button type="button" className="btn btn-lg btn-link">Link</button>
+        <AddTodo />
+        <VisibleTodoList />
+        <Filters />
+        <UndoRedo />
       </div>
   	</div>
   </main>
 );
+
 
 export default App;

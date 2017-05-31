@@ -2,16 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-
 import { AppContainer } from 'react-hot-loader';
-// AppContainer is a necessary wrapper component for HMR
-
 import App from './components/App';
+import todoApp from './reducers';
+
+
+
+const store = createStore(todoApp)
 
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <Component/>
+	    <Provider store={store}>
+	   		 <App />
+	  	</Provider>
     </AppContainer>,
     document.getElementById('root')
   );
